@@ -33,6 +33,9 @@ export async function POST(request: Request) {
       )
     }
 
+    console.log("[v0] Sending email via Resend...")
+    console.log("[v0] RESEND_API_KEY exists:", !!RESEND_API_KEY)
+    
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -56,11 +59,14 @@ export async function POST(request: Request) {
     })
 
     const responseData = await response.json()
+    console.log("[v0] Resend response status:", response.status)
+    console.log("[v0] Resend response data:", JSON.stringify(responseData))
 
     if (response.ok) {
+      console.log("[v0] Email sent successfully!")
       return NextResponse.json({ success: true })
     } else {
-      console.error("Resend API error:", responseData)
+      console.error("[v0] Resend API error:", JSON.stringify(responseData))
       return NextResponse.json(
         { error: "Erreur lors de l'envoi du courriel" },
         { status: 500 }
