@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       )
     }
 
-    // Log submission to console (for now)
+    // Log submission to console
     console.log("=== NOUVELLE DEMANDE DE SOUMISSION ===")
     console.log("Nom:", name)
     console.log("Courriel:", email)
@@ -24,11 +24,9 @@ export async function POST(request: Request) {
 
     // Try to send via Resend if API key is available
     const RESEND_API_KEY = process.env.RESEND_API_KEY
-    console.log("[v0] RESEND_API_KEY available:", !!RESEND_API_KEY)
     
     if (RESEND_API_KEY) {
       try {
-        console.log("[v0] Attempting to send email via Resend...")
         const response = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -52,17 +50,14 @@ export async function POST(request: Request) {
         })
 
         const responseData = await response.json()
-        console.log("[v0] Resend response status:", response.status)
-        console.log("[v0] Resend response data:", responseData)
 
         if (response.ok) {
-          console.log("[v0] Email sent successfully via Resend")
           return NextResponse.json({ success: true })
         } else {
-          console.error("[v0] Resend returned error:", responseData)
+          console.error("Resend error:", responseData)
         }
       } catch (resendError) {
-        console.error("[v0] Resend error:", resendError)
+        console.error("Resend fetch error:", resendError)
       }
     }
 
