@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       )
     }
 
-    // Log submission to console (for now)
+    // Log submission to console
     console.log("=== NOUVELLE DEMANDE DE SOUMISSION ===")
     console.log("Nom:", name)
     console.log("Courriel:", email)
@@ -22,55 +22,50 @@ export async function POST(request: Request) {
     console.log("Timestamp:", new Date().toISOString())
     console.log("========================================")
 
-    // Try to send via Resend if API key is available
+    // Send via Resend
     const RESEND_API_KEY = process.env.RESEND_API_KEY
-    console.log("[v0] RESEND_API_KEY available:", !!RESEND_API_KEY)
     
-    if (RESEND_API_KEY) {
-      try {
-        console.log("[v0] Attempting to send email via Resend...")
-        const response = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${RESEND_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: "Dax Excavation <noreply@daxexcavation.com>",
-            to: "info@daxexcavation.com",
-            subject: `Nouvelle demande de soumission de ${name}`,
-            html: `
-              <h2>Nouvelle demande de soumission</h2>
-              <p><strong>Nom:</strong> ${name}</p>
-              <p><strong>Courriel:</strong> ${email}</p>
-              <p><strong>Téléphone:</strong> ${phone}</p>
-              <h3>Message:</h3>
-              <p>${message.replace(/\n/g, "<br>")}</p>
-            `,
-            reply_to: email,
-          }),
-        })
-
-        const responseData = await response.json()
-        console.log("[v0] Resend response status:", response.status)
-        console.log("[v0] Resend response data:", responseData)
-
-        if (response.ok) {
-          console.log("[v0] Email sent successfully via Resend")
-          return NextResponse.json({ success: true })
-        } else {
-          console.error("[v0] Resend returned error:", responseData)
-        }
-      } catch (resendError) {
-        console.error("[v0] Resend error:", resendError)
-      }
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY not configured")
+      return NextResponse.json(
+        { error: "Service de courriel non configuré" },
+        { status: 500 }
+      )
     }
 
-    // Return success - email logged to server console
-    return NextResponse.json({ 
-      success: true,
-      message: "Demande reçue. L'administrateur a été notifié."
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Dax Excavation <onboarding@resend.dev>",
+        to: "info@daxexcavation.com",
+        subject: `Nouvelle demande de soumission de ${name}`,
+        html: `
+          <h2>Nouvelle demande de soumission</h2>
+          <p><strong>Nom:</strong> ${name}</p>
+          <p><strong>Courriel:</strong> ${email}</p>
+          <p><strong>Téléphone:</strong> ${phone}</p>
+          <h3>Message:</h3>
+          <p>${message.replace(/\n/g, "<br>")}</p>
+        `,
+        reply_to: email,
+      }),
     })
+
+    const responseData = await response.json()
+
+    if (response.ok) {
+      return NextResponse.json({ success: true })
+    } else {
+      console.error("Resend API error:", responseData)
+      return NextResponse.json(
+        { error: "Erreur lors de l'envoi du courriel" },
+        { status: 500 }
+      )
+    }
 
   } catch (error) {
     console.error("Contact form error:", error)
