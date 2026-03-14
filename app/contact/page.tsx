@@ -31,34 +31,29 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const [error, setError] = useState<string | null>(null)
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setError(null)
     
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || "Une erreur est survenue")
-      }
-
-      setIsSubmitted(true)
-      setFormState({ name: "", email: "", phone: "", message: "" })
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur est survenue")
-    } finally {
-      setIsSubmitting(false)
+    // Validate required fields
+    if (!formState.name || !formState.email || !formState.phone || !formState.message) {
+      return
     }
+
+    // Compose email using mailto: - works with any email provider
+    const subject = encodeURIComponent(`Nouvelle demande de soumission de ${formState.name}`)
+    const body = encodeURIComponent(
+      `Nom: ${formState.name}\n` +
+      `Courriel: ${formState.email}\n` +
+      `Téléphone: ${formState.phone}\n\n` +
+      `Message:\n${formState.message}`
+    )
+    
+    // Open email client
+    window.location.href = `mailto:info@daxexcavation.com?subject=${subject}&body=${body}`
+    
+    // Show success message
+    setIsSubmitted(true)
+    setFormState({ name: "", email: "", phone: "", message: "" })
   }
 
   return (
@@ -115,11 +110,6 @@ export default function ContactPage() {
                 </Card>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {error && (
-                    <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
-                      {error}
-                    </div>
-                  )}
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">Nom complet *</Label>
