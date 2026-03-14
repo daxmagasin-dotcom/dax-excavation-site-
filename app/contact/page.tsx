@@ -1,72 +1,12 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Phone, Mail, MapPin, Clock, CheckCircle2 } from "lucide-react"
-
-const serviceTypes = [
-  "Excavation",
-  "Défrichage",
-  "Tranchées",
-  "Préparation de terrain",
-  "Nivellement",
-  "Autre",
-]
+import { Phone, Mail, MapPin, Clock } from "lucide-react"
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    // Validate required fields
-    if (!formState.name || !formState.email || !formState.phone || !formState.message) {
-      setError("Tous les champs sont requis")
-      return
-    }
-
-    setIsSubmitting(true)
-    setError(null)
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || "Une erreur est survenue")
-      }
-
-      setIsSubmitted(true)
-      setFormState({ name: "", email: "", phone: "", message: "" })
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur est survenue")
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -102,88 +42,56 @@ export default function ContactPage() {
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Formulaire de contact */}
+            {/* CTA Email */}
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-6">Demander une soumission</h2>
               
-              {isSubmitted ? (
-                <Card className="bg-card border-primary">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="h-8 w-8 text-primary" />
+              <Card className="bg-card border-border">
+                <CardContent className="p-8">
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Mail className="h-10 w-10 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Merci!</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Nous avons reçu votre demande et vous répondrons dans les 24 heures.
+                    <h3 className="text-xl font-semibold text-foreground mb-4">
+                      Envoyez-nous un courriel
+                    </h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Pour obtenir une soumission gratuite, envoyez-nous un courriel avec les détails de votre projet: 
+                      emplacement, type de travaux, envergure et échéancier souhaité.
                     </p>
-                    <Button onClick={() => setIsSubmitted(false)}>Soumettre une autre demande</Button>
-                  </CardContent>
-                </Card>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {error && (
-                    <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
-                      {error}
-                    </div>
-                  )}
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Nom complet *</Label>
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="Jean Tremblay"
-                        required
-                        value={formState.name}
-                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Numéro de téléphone *</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="(514) 123-4567"
-                        required
-                        value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                      />
-                    </div>
+                    <Button asChild size="lg" className="w-full sm:w-auto">
+                      <a href="mailto:info@daxexcavation.com?subject=Demande de soumission">
+                        info@daxexcavation.com
+                      </a>
+                    </Button>
+                    <p className="text-sm text-muted-foreground mt-4">
+                      Nous répondons dans les 24 heures
+                    </p>
                   </div>
+                </CardContent>
+              </Card>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Adresse courriel *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="jean@exemple.com"
-                      required
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Détails du projet *</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Décrivez votre projet: emplacement, envergure, échéancier, etc."
-                      rows={5}
-                      required
-                      value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    />
-                  </div>
-
-                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
-                  </Button>
-
-                  <p className="text-xs text-muted-foreground text-center">
-                    En soumettant ce formulaire, vous acceptez d'être contacté concernant votre demande.
-                  </p>
-                </form>
-              )}
+              <div className="mt-8 p-6 bg-muted/50 rounded-lg border border-border">
+                <h4 className="font-semibold text-foreground mb-3">Informations à inclure dans votre courriel:</h4>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Votre nom et numéro de téléphone</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Adresse ou emplacement du projet</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Type de travaux souhaités</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Échéancier prévu</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Informations de contact */}
