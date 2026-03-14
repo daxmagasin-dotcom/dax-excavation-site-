@@ -1,32 +1,29 @@
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
+  console.log("[v0] Contact API called - v2")
+  
   try {
     const body = await request.json()
     const { name, email, phone, message } = body
+    
+    console.log("[v0] Form data received:", { name, email, phone, messageLength: message?.length })
 
     // Validate required fields
     if (!name || !email || !phone || !message) {
+      console.log("[v0] Validation failed - missing fields")
       return NextResponse.json(
         { error: "Tous les champs sont requis" },
         { status: 400 }
       )
     }
 
-    // Log submission to console
-    console.log("=== NOUVELLE DEMANDE DE SOUMISSION ===")
-    console.log("Nom:", name)
-    console.log("Courriel:", email)
-    console.log("Téléphone:", phone)
-    console.log("Message:", message)
-    console.log("Timestamp:", new Date().toISOString())
-    console.log("========================================")
-
     // Send via Resend
     const RESEND_API_KEY = process.env.RESEND_API_KEY
+    console.log("[v0] RESEND_API_KEY exists:", !!RESEND_API_KEY)
     
     if (!RESEND_API_KEY) {
-      console.error("RESEND_API_KEY not configured")
+      console.error("[v0] RESEND_API_KEY not configured")
       return NextResponse.json(
         { error: "Service de courriel non configuré" },
         { status: 500 }
@@ -34,7 +31,6 @@ export async function POST(request: Request) {
     }
 
     console.log("[v0] Sending email via Resend...")
-    console.log("[v0] RESEND_API_KEY exists:", !!RESEND_API_KEY)
     
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
