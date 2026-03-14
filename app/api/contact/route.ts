@@ -13,35 +13,42 @@ export async function POST(request: Request) {
       )
     }
 
-    // Use FormSubmit.co - free email forwarding service (no API key needed)
-    // First submission will require email confirmation from info@daxexcavation.com
-    const response = await fetch("https://formsubmit.co/ajax/info@daxexcavation.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        message: message,
-        _subject: `Nouvelle demande de soumission de ${name}`,
-        _template: "table",
-      }),
-    })
+    const RESEND_API_KEY = process.env.RESEND_API_KEY
 
-    if (!response.ok) {
-      console.error("FormSubmit error:", await response.text())
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY not configured")
       return NextResponse.json(
-        { error: "Erreur lors de l'envoi du courriel" },
+        { error: "Service d'email non configuré. Veuillez contacter l'administrateur." },
         { status: 500 }
       )
     }
 
-    const result = await response.json()
-    
-    if (result.success === "false" || result.success === false) {
+    // Send email using Resend
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Dax Excavation <noreply@daxexcavation.com>",
+        to: "info@daxexcavation.com",
+        subject: `Nouvelle demande de soumission de ${name}`,
+        html: `
+          <h2>Nouvelle demande de soumission</h2>
+          <p><strong>Nom:</strong> ${name}</p>
+          <p><strong>Courriel:</strong> ${email}</p>
+          <p><strong>Téléphone:</strong> ${phone}</p>
+          <h3>Message:</h3>
+          <p>${message.replace(/\n/g, "<br>")}</p>
+        `,
+        reply_to: email,
+      }),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      console.error("Resend API error:", errorData)
       return NextResponse.json(
         { error: "Erreur lors de l'envoi du courriel" },
         { status: 500 }
