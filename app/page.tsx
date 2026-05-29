@@ -4,38 +4,38 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Shovel, TreePine, Ruler, Mountain, ArrowRight, CheckCircle2, Star, Quote, Leaf, Shield } from "lucide-react"
+import { Shovel, TreePine, Ruler, Mountain, ArrowRight, CheckCircle2, Star, Quote, Leaf, Shield, Blocks } from "lucide-react"
 
 const services = [
   {
-    icon: TreePine,
-    title: "Défrichage",
-    description: "Déboisement efficace d'arbres, broussailles et débris pour préparer votre terrain.",
+    icon: Blocks,
+    title: "Murs de soutènement",
+    description: "Spécialistes en murs en boulders naturels, roches guillotine, blocs de béton et pierre.",
   },
   {
     icon: Shovel,
     title: "Terrassement",
-    description: "Travaux de terrassement pour aménagement paysager et préparation de terrain.",
+    description: "Travaux de terrassement et excavation pour tous vos projets de terrain.",
+  },
+  {
+    icon: TreePine,
+    title: "Défrichage",
+    description: "Déboisement efficace pour préparer votre terrain.",
   },
   {
     icon: Mountain,
     title: "Nivellement",
-    description: "Services de nivellement pour améliorer le drainage et l'esthétique de votre terrain.",
+    description: "Services experts de nivellement et aménagement de pentes.",
   },
   {
     icon: Ruler,
     title: "Fossés et drainage",
-    description: "Création de fossés et systèmes de drainage pour terrains agricoles et résidentiels.",
+    description: "Systèmes de drainage complets pour votre terrain.",
   },
   {
     icon: Leaf,
     title: "Aménagement paysager",
-    description: "Murs de rétention en roche naturelle ou blocs, ensemencement et finitions paysagères.",
-  },
-  {
-    icon: Shield,
-    title: "Contrôle de l'érosion",
-    description: "Solutions de protection et stabilisation de terrain respectueuses de l'environnement.",
+    description: "Finitions paysagères et préparation de terrain.",
   },
 ]
 
@@ -65,6 +65,12 @@ const testimonials = [
     role: "Propriétaire - Dérichage et aménagement stationnement",
     rating: 5,
   },
+  {
+    quote: "Excellente expérience ! Travail impeccable, équipe professionnelle et respect des délais et budget. Très bonne communication et résultat au-delà de nos attentes. Je recommande fortement.",
+    author: "G. Buca",
+    role: "Propriétaire",
+    rating: 5,
+  },
 ]
 
 export default function HomePage() {
@@ -76,36 +82,36 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Messenger_creation_AE12655F-C4FD-479B-AF7B-3E25DF320008-EEnlDqPVLezpfalcKUKa2l5Dbf2ePX.jpeg"
-            alt="Excavatrice au travail sur un chantier"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-2217857281-612x612-eC2fN28LK49Lk5FkMTVeqshMl5rxAJ.jpg"
+            alt="Mur de soutènement en roche naturelle"
             fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-background/80" />
+          <div className="absolute inset-0 bg-background/85" />
         </div>
         
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 lg:px-8 lg:py-32">
           <div className="max-w-3xl">
             <p className="text-primary font-semibold tracking-wider uppercase mb-4">
-              Votre partenaire de confiance
+              Experts en murs de soutènement
             </p>
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance">
-              Défrichage, terrassement et aménagement
+              Murs de soutènement durables et esthétiques
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Services complets de défrichage, terrassement, drainage et aménagement paysager. 
-              Avec un équipement moderne et une équipe dévouée, nous livrons des résultats de qualité à temps et selon le budget.
+              Spécialistes en construction de murs de soutènement avec boulders naturels, roches guillotine et blocs de béton. 
+              Nous offrons également des services complets d'excavation, terrassement et aménagement paysager pour tous vos projets.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Button size="lg" asChild className="text-base">
-                <Link href="/contact">
-                  Demander une soumission gratuite
+                <Link href="/murs-soutenement">
+                  Découvrir nos murs de soutènement
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="text-base">
-                <Link href="/services">Nos services</Link>
+                <Link href="/services">Tous les services</Link>
               </Button>
             </div>
             
@@ -113,15 +119,15 @@ export default function HomePage() {
             <div className="mt-12 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
+                <span>Design personnalisé</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-primary" />
+                <span>Équipe spécialisée</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-primary" />
                 <span>Estimations gratuites</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>Service professionnel</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>Équipement moderne</span>
               </div>
             </div>
           </div>
@@ -146,12 +152,12 @@ export default function HomePage() {
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-primary font-semibold tracking-wider uppercase mb-4">Ce que nous faisons</p>
+            <p className="text-primary font-semibold tracking-wider uppercase mb-4">Nos services</p>
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl text-balance">
-              Nos services complets
+              Expertise complète en excavation
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Du défrichage à l'aménagement paysager, nous offrons des services de terrassement et finitions adaptés aux besoins de votre projet.
+              Murs de soutènement spécialisés plus services complets d'excavation, terrassement, drainage et aménagement paysager.
             </p>
           </div>
 
