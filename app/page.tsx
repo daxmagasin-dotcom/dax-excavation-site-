@@ -4,7 +4,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Shovel, TreePine, Ruler, Mountain, ArrowRight, CheckCircle2, Star, Quote, Leaf, Shield } from "lucide-react"
+import { Shovel, TreePine, Ruler, Mountain, ArrowRight, CheckCircle2, Star, Quote, Leaf, Shield, Blocks } from "lucide-react"
 
 const services = [
   {
@@ -28,14 +28,14 @@ const services = [
     description: "Création de fossés et systèmes de drainage pour terrains agricoles et résidentiels.",
   },
   {
-    icon: Leaf,
-    title: "Aménagement paysager",
-    description: "Murs de rétention en roche naturelle ou blocs, ensemencement et finitions paysagères.",
+    icon: Blocks,
+    title: "Murs de soutènement",
+    description: "Construction de murs en boulders, roches guillotine, blocs de béton et pierre naturelle.",
   },
   {
-    icon: Shield,
-    title: "Contrôle de l'érosion",
-    description: "Solutions de protection et stabilisation de terrain respectueuses de l'environnement.",
+    icon: Leaf,
+    title: "Aménagement paysager",
+    description: "Ensemencement, finitions paysagères et préparation de terrain résidentiel.",
   },
 ]
 

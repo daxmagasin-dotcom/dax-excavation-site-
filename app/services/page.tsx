@@ -5,11 +5,11 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Shovel, TreePine, Ruler, Mountain, ArrowRight, CheckCircle2, Leaf, Shield } from "lucide-react"
+import { Shovel, TreePine, Ruler, Mountain, ArrowRight, CheckCircle2, Leaf, Shield, Blocks } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Nos Services | Dax Excavation",
-  description: "Services professionnels de défrichage, terrassement, nivellement, drainage et aménagement paysager au Québec.",
+  description: "Services professionnels de défrichage, terrassement, nivellement, drainage, murs de soutènement et aménagement paysager au Québec.",
 }
 
 const services = [
@@ -74,17 +74,32 @@ const services = [
     ],
   },
   {
-    id: "amenagement-paysager",
-    icon: Leaf,
-    title: "Aménagement paysager et murs de rétention",
-    description: "Services d'aménagement paysager complets incluant la construction de murs de rétention en roche naturelle ou blocs de paysagement, ensemencement et finitions.",
+    id: "murs-soutenement",
+    icon: Blocks,
+    title: "Murs de soutènement",
+    description: "Spécialistes en construction de murs de soutènement durables et esthétiques. Du boulder naturel aux blocs guillotine, nous créons des structures solides adaptées à votre terrain.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-2217857281-612x612-eC2fN28LK49Lk5FkMTVeqshMl5rxAJ.jpg",
     features: [
-      "Murs de rétention en roche naturelle",
-      "Murs de rétention en blocs de paysagement",
-      "Installation de structures paysagères",
+      "Murs en boulders naturels",
+      "Murs en roches guillotine (armour stone)",
+      "Blocs de béton modulaires",
+      "Murs en pierre naturelle",
+      "Stabilisation de pentes et talus",
+      "Design personnalisé selon votre terrain",
+    ],
+  },
+  {
+    id: "amenagement-paysager",
+    icon: Leaf,
+    title: "Aménagement paysager",
+    description: "Services d'aménagement paysager complets incluant ensemencement, finitions et préparation de terrain pour vos projets résidentiels.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/360_F_589558372_qE6hYTrrkClZC3FSoj6i3mrQrjxoZbqm-WhCuXyt1ftkTq2XPUmcTninsyUARuT.jpg",
+    features: [
       "Préparation et ensemencement de gazon",
+      "Installation de structures paysagères",
       "Aménagement d'entrée et finitions",
+      "Bordures et délimitations",
+      "Terrassement décoratif",
       "Design et réalisation sur mesure",
     ],
   },
