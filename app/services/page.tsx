@@ -14,6 +14,21 @@ export const metadata: Metadata = {
 
 const services = [
   {
+    id: "murs-soutenement",
+    icon: Blocks,
+    title: "Murs de soutènement",
+    description: "Spécialistes en construction de murs de soutènement durables et esthétiques. Du boulder naturel aux blocs guillotine, nous créons des structures solides adaptées à votre terrain.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-2217857281-612x612-eC2fN28LK49Lk5FkMTVeqshMl5rxAJ.jpg",
+    features: [
+      "Murs en boulders naturels",
+      "Murs en roches guillotine (armour stone)",
+      "Blocs de béton modulaires",
+      "Murs en pierre naturelle",
+      "Stabilisation de pentes et talus",
+      "Design personnalisé selon votre terrain",
+    ],
+  },
+  {
     id: "defrichage",
     icon: TreePine,
     title: "Défrichage",
@@ -71,21 +86,6 @@ const services = [
       "Gestion des eaux de surface",
       "Correction de problèmes d'eau stagnante",
       "Entretien de fossés existants",
-    ],
-  },
-  {
-    id: "murs-soutenement",
-    icon: Blocks,
-    title: "Murs de soutènement",
-    description: "Spécialistes en construction de murs de soutènement durables et esthétiques. Du boulder naturel aux blocs guillotine, nous créons des structures solides adaptées à votre terrain.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-2217857281-612x612-eC2fN28LK49Lk5FkMTVeqshMl5rxAJ.jpg",
-    features: [
-      "Murs en boulders naturels",
-      "Murs en roches guillotine (armour stone)",
-      "Blocs de béton modulaires",
-      "Murs en pierre naturelle",
-      "Stabilisation de pentes et talus",
-      "Design personnalisé selon votre terrain",
     ],
   },
   {
