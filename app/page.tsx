@@ -65,6 +65,12 @@ const testimonials = [
     role: "Propriétaire - Dérichage et aménagement stationnement",
     rating: 5,
   },
+  {
+    quote: "Excellente expérience ! Travail impeccable, équipe professionnelle et respect des délais et budget. Très bonne communication et résultat au-delà de nos attentes. Je recommande fortement.",
+    author: "G. Buca",
+    role: "Propriétaire",
+    rating: 5,
+  },
 ]
 
 export default function HomePage() {
