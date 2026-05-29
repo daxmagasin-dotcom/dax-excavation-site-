@@ -14,28 +14,22 @@ export const metadata: Metadata = {
 
 const wallTypes = [
   {
-    title: "Boulders naturels",
-    description: "Murs en roches naturelles massives pour un look authentique et durable. Parfait pour les pentes raides et les zones boisées.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-2217857281-612x612-eC2fN28LK49Lk5FkMTVeqshMl5rxAJ.jpg",
-    features: ["Aspect naturel", "Très durable", "Stabilisation de pentes", "Design authentique"],
+    title: "Roche de champ (Boulders naturels)",
+    description: "Murs en boulders naturels massifs pour un look authentique et durable. Parfait pour les pentes raides et les zones boisées.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pierre%20naturel-Lznvq2HcdCh0vXjdVTALDgu7EHw4QR.jpg",
+    features: ["Aspect naturel authentique", "Très durable", "Stabilisation de pentes", "Design naturel et organique"],
   },
   {
     title: "Roches guillotine (Armour Stone)",
     description: "Blocs de roche massive taillés pour l'interlocking. Haute capacité de retenue et finition professionnelle.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/360_F_589558372_qE6hYTrrkClZC3FSoj6i3mrQrjxoZbqm-WhCuXyt1ftkTq2XPUmcTninsyUARuT.jpg",
-    features: ["Empilement précis", "Très solide", "Finition nette", "Longévité garantie"],
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/guiottine-rENRhUkwbpBRaZ2FJYqrjp8By1YOgX.jpg",
+    features: ["Empilement précis", "Très solide", "Finition nette et structurée", "Longévité garantie"],
   },
   {
-    title: "Blocs de béton modulaires",
-    description: "Blocs préfabriqués pour une installation rapide et économique. Design moderne et finitions variées.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20250704_140417-13SG3o268k6Rfzwx5JE4hGQbSD8AXk.jpg",
-    features: ["Installation rapide", "Économique", "Largeur variable", "Finitions modernes"],
-  },
-  {
-    title: "Pierre naturelle empilée",
-    description: "Murs en pierre taillée pour un rendu classique et élégant. Excellent pour les aménagements résidentiels haut de gamme.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Messenger_creation_AE12655F-C4FD-479B-AF7B-3E25DF320008-EEnlDqPVLezpfalcKUKa2l5Dbf2ePX.jpeg",
-    features: ["Élégant", "Classique", "Premium", "Personnalisable"],
+    title: "Blocs Pro Bloc (Béton modulaires)",
+    description: "Blocs de béton préfabriqués avec finition ashlar pour un rendu esthétique moderne. Installation rapide et économique.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pro%20bloc-qaOFBD3BL5DhoY4rTNerhxPdGtVZez.jpg",
+    features: ["Finition moderne et élégante", "Installation rapide", "Économique et durable", "Largeur variable"],
   },
 ]
 
