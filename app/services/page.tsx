@@ -93,7 +93,7 @@ const services = [
     icon: Leaf,
     title: "Aménagement paysager",
     description: "Services d'aménagement paysager complets incluant ensemencement, finitions et préparation de terrain pour vos projets résidentiels.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/360_F_589558372_qE6hYTrrkClZC3FSoj6i3mrQrjxoZbqm-WhCuXyt1ftkTq2XPUmcTninsyUARuT.jpg",
+    image: "/images/amenagement-paysager.png",
     features: [
       "Préparation et ensemencement de gazon",
       "Installation de structures paysagères",
